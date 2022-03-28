@@ -1,10 +1,10 @@
 const express = require("express");
 
 const mongoose = require("mongoose");
-
+require("dotenv").config();
 const app = express();
 
-const MONGOOSE_URL = "";
+const MONGOOSE_URL = process.env.CONNECTION_STRING;
 mongoose.connect(MONGOOSE_URL, { useNewUrlParser: true });
 
 const postSchema = new mongoose.Schema({
@@ -61,4 +61,6 @@ const post1 = new Post({
 
 //post1.save();
 
-app.listen(4000, () => console.log("App running on port 4000"));
+app.listen(process.env.port || 4000, () =>
+    console.log("App running on port 4000")
+);
